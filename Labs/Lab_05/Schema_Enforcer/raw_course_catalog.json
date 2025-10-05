@@ -1,0 +1,42 @@
+[
+  {
+    "course_id": "DS2002",
+    "section": "001",
+    "title": "Data Science Systems",
+    "level": 200,
+    "instructors": [
+      {
+        "name": "Austin Rivera",
+        "role": "Primary"
+      },
+      {
+        "name": "Heywood Williams-Tracy",
+        "role": "TA"
+      }
+    ]
+  },
+  {
+    "course_id": "PSYC5500",
+    "section": "001",
+    "title": "Affective Neuroscience",
+    "level": 500,
+    "instructors": [
+      {
+        "name": "James Coan",
+        "role": "Primary"
+      }
+    ]
+  },
+  {
+    "course_id": "STAT3080",
+    "section": "002",
+    "title": "Data Visualization",
+    "level": 300,
+    "instructors": [
+      {
+        "name": "Rich Ross",
+        "role": "Primary"
+      }
+    ]
+  }
+]
