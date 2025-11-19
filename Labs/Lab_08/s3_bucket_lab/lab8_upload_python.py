@@ -1,39 +1,31 @@
 import boto3
 import requests
-import sys
 
-# Check command-line arguments
-if len(sys.argv) != 4:
-    print("Usage: python lab8_upload_python.py <file_url> <bucket_name> <expires_in_seconds>")
-    sys.exit(1)
+print("Downloading soccer ball image...")
+image_url = "https://images.pexels.com/photos/260907/pexels-photo-260907.jpeg"
+local_file_path = "crowd.jpeg"
 
-file_url = sys.argv[1]
-bucket_name = sys.argv[2]
-expires_in = int(sys.argv[3])
-
-# Extract filename from URL
-filename = file_url.split("/")[-1]
-
-# Step 1: Download the file from the internet
-print(f"Downloading {filename}...")
-response = requests.get(file_url)
-with open(filename, "wb") as f:
+response = requests.get(image_url)
+with open(local_file_path, "wb") as f:
     f.write(response.content)
+print("Image downloaded.")
 
-# Step 2: Create an S3 client
 s3 = boto3.client("s3", region_name="us-east-1")
+bucket = "ds2002-f25-vah3xr"
+s3_key = "crowd.jpeg"
 
-# Step 3: Upload file to S3
 print("Uploading file to S3...")
-s3.upload_file(Filename=filename, Bucket=bucket_name, Key=filename)
+s3.upload_file(local_file_path, bucket, s3_key)
+print("Upload complete.")
 
-# Step 4: Generate a presigned URL
+expires_in = 604800
+
 print("Generating presigned URL...")
 url = s3.generate_presigned_url(
     "get_object",
-    Params={"Bucket": bucket_name, "Key": filename},
+    Params={"Bucket": bucket, "Key": s3_key},
     ExpiresIn=expires_in
 )
 
-print(f"Presigned URL (expires in {expires_in} seconds):\n{url}")
-
+print("\nPresigned URL:")
+print(url)
